@@ -1,9 +1,7 @@
-version: '1.0.0'
-services:
-  web:
-    build: .
-    command: gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 4
-    volumes:
-      - .:/code
-    ports:
-      - 8000:8000
+FROM python:3
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code
+COPY requirements.txt /code/
+RUN pip install -r requirements.txt
+COPY . /code/
