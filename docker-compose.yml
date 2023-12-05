@@ -1,9 +1,12 @@
-version: '1.0.0'
+version: '3'
+
 services:
   web:
     build: .
-    command: gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 4
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:80
     volumes:
-      - .:/code
+      - .:/usr/src/app
     ports:
-      - 8000:8000
+      - "8000:80"
+    env_file:
+      - .env
